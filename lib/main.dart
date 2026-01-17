@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'screens/splash_screen.dart';
 
-void main() {
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:service_pro_rishi/models/service_request_model.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  Hive.registerAdapter(ServiceRequestAdapter());
+  await Hive.openBox<ServiceRequest>('service_requests');
   runApp(const MyApp());
 }
 
